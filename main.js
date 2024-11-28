@@ -1,41 +1,47 @@
 function appendToInput(value) {
   console.log("appendToInput", value);
   const inputField = document.getElementById("calcInput");
-  if (inputField) {
-    inputField.value += value;
-  } else {
-    console.warn("Element with ID 'calcInput' not found.");
-  }
+  inputField.value += value;
 }
 
 function calculateResult() {
   const inputField = document.getElementById("calcInput");
-
-  try {
-    const result = math.evaluate(inputField.value);
-    inputField.value = result;
-  } catch (error) {
-    console.error("Calculation error:", error);
-    inputField.value = "Error";
-  }
+  const result = math.evaluate(inputField.value);
+  inputField.value = result;
 }
 
 function clearInput() {
   const inputField = document.getElementById("calcInput");
-  if (inputField) {
-    inputField.value = "";
-  } else {
-    console.warn("Element with ID 'calcInput' not found.");
-  }
+  inputField.value = "";
 }
 
 function clearEntry() {
-  const inputField = document.getElementById("calcInput"); // Corrected ID
+  const inputField = document.getElementById("calcInput");
   if (inputField && typeof inputField.value === "string") {
-    inputField.value = inputField.value.slice(0, -1); // Remove the last character
+    inputField.value = inputField.value.slice(0, -1);
   } else {
-    console.warn(
-      "Element with ID 'calcInput' not found or value is not a string."
-    );
+    console.log("Error.");
   }
 }
+
+document.querySelectorAll("#btns button").forEach((button) => {
+  button.addEventListener("click", () => {
+    const value = button.textContent;
+
+    if (value === "C") {
+      clearInput();
+    } else if (value === "CE") {
+      clearEntry();
+    } else if (value === "=") {
+      calculateResult();
+    } else if (value === "×") {
+      appendToInput("*");
+    } else if (value === "÷") {
+      appendToInput("/");
+    } else if (value === "−") {
+      appendToInput("-");
+    } else {
+      appendToInput(value);
+    }
+  });
+});
