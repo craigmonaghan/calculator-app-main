@@ -15,6 +15,7 @@ body {
   color: white;
   border: none;
   background-color: hsl(0, 0%, 40%);
+  border: 6px;
 }
 #calculatorbg {
   font-family: Arial, sans-serif;
